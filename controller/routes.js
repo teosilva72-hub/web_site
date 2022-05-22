@@ -21,9 +21,13 @@ app.post('/', (req, res) => {
         nome: req.body.nome,
         valor: req.body.valor
     }).then(() => {
-        res.send('cadastrado com sucesso')
+        // res.send('cadastrado com sucesso')
+        //direcionamento caso sucesso
+        res.redirect('/')
     }).catch((err) => {
-        res.send('erro ao cadastrar' + err)
+        //res.send('erro ao cadastrar' + err)
+        //direcionamento caso erro
+        res.redirect('/')
     })
 })
 
