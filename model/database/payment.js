@@ -3,8 +3,8 @@ const payment = conn.conn.define('payment', {
     nome: {
         type: conn.Sequelize.STRING
     },
-    valor: {
-        type: conn.Sequelize.DOUBLE
+    senha: {
+        type: conn.Sequelize.STRING
     }
 })
 

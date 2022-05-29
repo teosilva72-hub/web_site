@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
     payment.create({
         nome: req.body.nome,
-        valor: req.body.valor
+        senha: req.body.senha
     }).then(() => {
         // res.send('cadastrado com sucesso')
         //direcionamento caso sucesso

@@ -7,15 +7,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Burger Divini</title>
     <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 
 <body>
 
-    <%- include('./template/navbar.ejs') %>
-        <%- include('./template/form.ejs') %>
-            <script src="/jquery/dist/jquery.js"></script>
-            <script src="/bootstrap/dist/js/bootstrap.js"></script>
-            <script src="/js/login.js"></script>
+    <%- 
+        include('./template/navbar.ejs')
+    %>
+        <div class="container-fluid" id="main">
+            <article id="login">
+                <%- include('./template/form.ejs') %>
+            </article>
+        </div>
+
+        <script src="/jquery/dist/jquery.js"></script>
+        <script src="/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="/js/login.js"></script>
 </body>
 
 </html>
