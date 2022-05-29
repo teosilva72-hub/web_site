@@ -4,7 +4,7 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const conn = require('../model/database/payment')
 const payment = require('../model/database/payment')
-const user = require('../model/database/user')
+const User = require('../model/database/user')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const port = 3000
@@ -16,31 +16,54 @@ app.use(bodyParser.json())
 app.set('view engine', 'ejs');
 app.set('views', './view/')
 
-app.get('/', (req, res) => {
-        res.render('index')
+app.post('/login', async(req, res) => {
+    // res.render('../view/template/login')
+    const user = await User.findOne({
+        attributes: ['id', 'name', 'email', 'password'],
+        where: {
+            email: req.body.email,
+            //password: req.body.password
+        }
     })
-    /*app.post('/', (req, res) => {
-        payment.create({
-            nome: req.body.nome,
-            senha: req.body.senha
-        }).then(() => {
-            // res.send('cadastrado com sucesso')
-            //direcionamento caso sucesso
-            res.redirect('/')
-        }).catch((err) => {
-            //res.send('erro ao cadastrar' + err)
-            //direcionamento caso erro
-            res.redirect('/')
+
+    if (user === null) {
+        return res.status(400).json({
+            erro: true,
+            mensagem: 'Usuário nao encontrado'
         })
-    })*/
-app.post('/cadastrar', async(req, res) => {
-    console.log(req.body)
-    const password = await bcrypt.hash('123456', 8)
+    }
+    if (!(await bcrypt.compare(req.body.password, user.password))) {
+        return res.status(400).json({
+            erro: true,
+            mensagem: 'Senha incorreta',
+        })
+    }
+    const token = jwt.sign({ id: user.id }, 'dfadsfadas454sadsa', {
+        expiresIn: '7d'
+    })
+    return res.status(200).json({
+        erro: false,
+        mensagem: 'login realizado com sucesso',
+        token
+    })
+
 })
 
-function teste(teste) {
-    console.log(teste)
-    return teste
-}
+app.post('/cadastrar', async(req, res) => {
+    const dados = req.body
+    dados.password = await bcrypt.hash(dados.password, 8)
+    await User.create(dados).then(() => {
+        return res.status(201).json({
+            erro: false,
+            mensagem: 'Usuário Cadastrado com sucesso'
+        })
+    }).catch((err) => {
+        return res.status(400).json({
+            erro: true,
+            mensagem: 'Erro ao cadastrar'
+        })
+    })
+})
+
 app.use(express.static(path.join(__dirname, "../view/resources")))
 app.use(express.static(path.join(__dirname, "../node_modules")))
