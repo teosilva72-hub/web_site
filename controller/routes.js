@@ -7,15 +7,24 @@ const payment = require('../model/database/payment')
 const User = require('../model/database/user')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const { eAdmin } = require('./auth')
 const port = 3000
 app.listen(port)
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-
+app.use(express.json())
 app.set('view engine', 'ejs');
 app.set('views', './view/')
 
+app.get('/', eAdmin, async(req, res) => {
+    return res.json({
+        erro: false,
+        mensagem: 'listar usuários',
+        userId: req.userId,
+        userName: req.userName
+    })
+})
 app.post('/login', async(req, res) => {
     // res.render('../view/template/login')
     const user = await User.findOne({
@@ -38,8 +47,8 @@ app.post('/login', async(req, res) => {
             mensagem: 'Senha incorreta',
         })
     }
-    const token = jwt.sign({ id: user.id }, 'dfadsfadas454sadsa', {
-        expiresIn: '7d'
+    const token = jwt.sign({ id: user.id, name: user.name }, 'ASD4ASDAS5D4SAD2ASDSADS8F5', {
+        expiresIn: 600 //10 min
     })
     return res.status(200).json({
         erro: false,
