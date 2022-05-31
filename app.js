@@ -1,1 +1,0 @@
-const routes = require('./controller/routes')
