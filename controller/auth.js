@@ -4,6 +4,7 @@ const { promisify } = require('util')
 module.exports = {
     eAdmin: async(req, res, next) => {
         const authHeader = req.headers.authorization
+
         if (!authHeader) {
             return res.status(400).json({
                 erro: true,
@@ -11,7 +12,6 @@ module.exports = {
             })
         }
         const [, token] = authHeader.split(' ')
-        console.log('Token ' + token)
         if (!token) {
             return res.status(400).json({
                 erro: true,
@@ -22,6 +22,8 @@ module.exports = {
             const decode = await promisify(jwt.verify)(token, 'ASD4ASDAS5D4SAD2ASDSADS8F5')
             req.userId = decode.id
             req.userName = decode.name
+            console.log('token valido')
+                // res.redirect('/')
             return next()
         } catch (err) {
             return res.status(400).json({

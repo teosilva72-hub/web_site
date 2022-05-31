@@ -13,7 +13,7 @@
 <body>
 
     <form method="post">
-        <div class="row" id="linhaForm">
+        <div class="row" id="linhaForm" action="localhost:3000/">
             <div class="col-12">
 
                 <div class="shadow p-3 mb-5 bg-body rounded" id="login-session">
@@ -23,9 +23,10 @@
                     <h1>Login</h1>
                     <hr>
                     <span for="user-name">Usuário</span>
-                    <input type="text" class="form-control" id="nome" name="nome">
+                    <input type="text" class="form-control" id="nome" name="email">
                     <span for="user-password">Senha</span>
-                    <input type="password" class="form-control" id="senha" name="senha">
+                    <input type="password" class="form-control" id="senha" name="password">
+                    <input type="hidden" name="LTI-Authorization" value="Token consumerKey:consumerSecret" />
                     <hr>
                     <button type="submit" class="btn btn-dark" id="logar">Enviar</button>
 

@@ -18,14 +18,32 @@ app.set('view engine', 'ejs');
 app.set('views', './view/')
 
 app.get('/', eAdmin, async(req, res) => {
-    return res.json({
-        erro: false,
-        mensagem: 'listar usuários',
-        userId: req.userId,
-        userName: req.userName
+    await User.findAll({
+        attributes: ['id', 'name', 'email'],
+        order: [
+            ['id', 'desc']
+        ]
+    }).then((users) => {
+        return res.status(200).json({
+            erro: false,
+            users: users,
+            id_logado: req.userId
+        })
+    }).catch(() => {
+        return res.json({
+            erro: false,
+            mensagem: 'listar usuários',
+            userId: req.userId,
+            userName: req.userName
+        })
     })
+
+})
+app.get('/login', (req, res) => {
+    res.render('../view/template/login')
 })
 app.post('/login', async(req, res) => {
+
     // res.render('../view/template/login')
     const user = await User.findOne({
         attributes: ['id', 'name', 'email', 'password'],
@@ -36,9 +54,10 @@ app.post('/login', async(req, res) => {
     })
 
     if (user === null) {
+
         return res.status(400).json({
             erro: true,
-            mensagem: 'Usuário nao encontrado'
+            mensagem: 'Usuário ou senha incorreta.'
         })
     }
     if (!(await bcrypt.compare(req.body.password, user.password))) {
@@ -50,6 +69,9 @@ app.post('/login', async(req, res) => {
     const token = jwt.sign({ id: user.id, name: user.name }, 'ASD4ASDAS5D4SAD2ASDSADS8F5', {
         expiresIn: 600 //10 min
     })
+    res.cookie('token', token)
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     return res.status(200).json({
         erro: false,
         mensagem: 'login realizado com sucesso',
