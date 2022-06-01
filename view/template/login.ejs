@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burger Divini</title>
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+
+<body>
+
+    <form method="post">
+        <div class="row" id="linhaForm" action="/">
+            <div class="col-12">
+
+                <div class="shadow p-3 mb-5 bg-body rounded" id="login-session">
+                    <svg id="close-session-login" width="16" height="16" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
+                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/>
+                      </svg>
+                    <h1>Login</h1>
+                    <hr>
+                    <span for="user-name">Usuário</span>
+                    <input type="text" class="form-control" id="nome" name="email">
+                    <span for="user-password">Senha</span>
+                    <input type="password" class="form-control" id="senha" name="password">
+                    <input type="hidden" name="token" id="token" value="" />
+                    <hr>
+                    <button type="submit" class="btn btn-dark" id="logar">Enviar</button>
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <script src="/jquery/dist/jquery.js"></script>
+    <script src="/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/js/login.js"></script>
+</body>
+
+</html>
