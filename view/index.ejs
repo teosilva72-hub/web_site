@@ -8,22 +8,40 @@
     <title>Burger Divini</title>
     <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/produto.css">
+    <link rel="stylesheet" href="/css/estrelaEfeito.css">
 </head>
 
 <body>
+    <header>
+        <%- include('./template/navbar.ejs') %>
+    </header>
 
-    <%- 
-        include('./template/navbar.ejs')
-    %>
-        <div class="container-fluid" id="main">
-            <article id="login">
-                <%- include('./template/login.ejs') %>
+    <%- include('./template/modalPedido.ejs') %>
+
+        <main id="main">
+            <article id="ProdutoIndex" class="">
+                <div id="Carrosel">
+                    <%- include('./template/carrosel.ejs')  %>
+                </div>
+                <div class="title">
+                    <div class="">
+                        <h5><span class="badge bg-dark bageSet">Menu</span></h5>
+
+                    </div>
+                </div>
+                <div id="Produtos" class="container">
+                    <%- include('./template/product.ejs')%>
+                </div>
             </article>
-        </div>
+        </main>
+
 
         <script src="/jquery/dist/jquery.js"></script>
         <script src="/bootstrap/dist/js/bootstrap.js"></script>
         <script src="/js/login.js"></script>
+        <script src="/js/produtos.js"></script>
+        <script src="/js/index.js"></script>
 </body>
 
 </html>

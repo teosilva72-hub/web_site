@@ -1,0 +1,34 @@
+@keyframes star {
+    0% {
+        color: yellow;
+        left: 0px;
+        top: 0px;
+    }
+    25% {
+        color: rgb(193, 193, 24);
+        left: 200px;
+        top: 0px;
+    }
+    50% {
+        color: goldenrod;
+        left: 200px;
+        top: 200px;
+    }
+    75% {
+        color: white;
+        left: 0px;
+        top: 200px;
+    }
+    100% {
+        color: rgba(255, 255, 0, 0.494);
+        left: 0px;
+        top: 0px;
+    }
+}
+
+.efeitoEstrela {
+    color: red;
+    animation-name: star;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}

@@ -1,36 +1,27 @@
 const { Sequelize } = require('./conn')
 const Conn = require('./conn')
-const User = Conn.conn.define('user', {
+const Produto = Conn.conn.define('produto', {
         id: {
             type: Sequelize.INTEGER,
             autoIncrement: true,
             allowNull: false,
             primaryKey: true
         },
+        categoria: {
+            type: Sequelize.STRING
+        },
         name: {
             type: Sequelize.STRING
         },
-        email: {
+        descricao: {
             type: Sequelize.STRING
         },
-        senha: {
+        imagem: {
             type: Sequelize.STRING
         },
-        cep: {
-            type: Sequelize.STRING
-        },
-        logradouro: {
-            type: Sequelize.STRING
-        },
-        bairro: {
-            type: Sequelize.STRING
-        },
-        cidade: {
-            type: Sequelize.STRING
-        },
-        uf: {
+        valor: {
             type: Sequelize.STRING
         }
     })
-    //User.sync({ force: true })
-module.exports = User
+    //Produto.sync({ force: true })
+module.exports = Produto

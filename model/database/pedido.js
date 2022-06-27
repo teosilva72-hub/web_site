@@ -1,6 +1,6 @@
 const { Sequelize } = require('./conn')
 const Conn = require('./conn')
-const User = Conn.conn.define('user', {
+const Pedido = Conn.conn.define('pedido', {
         id: {
             type: Sequelize.INTEGER,
             autoIncrement: true,
@@ -10,27 +10,18 @@ const User = Conn.conn.define('user', {
         name: {
             type: Sequelize.STRING
         },
-        email: {
+        descricao: {
             type: Sequelize.STRING
         },
-        senha: {
+        unidade: {
             type: Sequelize.STRING
         },
-        cep: {
+        valor: {
             type: Sequelize.STRING
         },
-        logradouro: {
-            type: Sequelize.STRING
-        },
-        bairro: {
-            type: Sequelize.STRING
-        },
-        cidade: {
-            type: Sequelize.STRING
-        },
-        uf: {
+        total: {
             type: Sequelize.STRING
         }
     })
-    //User.sync({ force: true })
-module.exports = User
+    //Pedido.sync({ force: true })
+module.exports = Pedido

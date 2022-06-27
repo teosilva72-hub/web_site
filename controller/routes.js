@@ -5,6 +5,9 @@ const bodyParser = require('body-parser')
 const conn = require('../model/database/payment')
 const payment = require('../model/database/payment')
 const User = require('../model/database/user')
+const Pedido = require('../model/database/pedido')
+const Produto = require('../model/database/produto')
+const Carrosel = require('../model/database/carrosel')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const { eAdmin } = require('./auth')
@@ -18,42 +21,44 @@ app.use(express.json())
 app.set('view engine', 'ejs');
 app.set('views', './view/')
 
-app.get('/', eAdmin, async(req, res) => {
-    await User.findAll({
-        attributes: ['id', 'name', 'email'],
-        order: [
-            ['id', 'desc']
-        ]
-    }).then((users) => {
-        return res.status(200).json({
-            erro: false,
-            users: users,
-            id_logado: req.userId
-        })
-    }).catch(() => {
-        return res.json({
-            erro: false,
-            mensagem: 'listar usuários',
-            userId: req.userId,
-            userName: req.userName
-        })
+app.get('/', async(req, res) => {
+    const produto = await Produto.findAll();
+    const carrosel = await Carrosel.findAll();
+    console.log(carrosel)
+    res.render('../view/index.ejs', { produto: produto, carrosel: carrosel })
+
+});
+
+app.get('/cadastrar-Produto', (req, res) => {
+    res.render('../view/template/cadastroProd.ejs')
+});
+
+app.post('/cadastrar-Produto', async(req, res) => {
+    const dados = req.body
+        //console.log(dados)
+    await Produto.create(dados).then(() => {
+        console.log(dados)
+    }).catch((err) => {
+        console.log(err)
     })
 
+    return res.status(200);
+});
 
-})
+
 app.get('/login', (req, res) => {
     res.render('../view/template/login')
-})
-app.post('/login', async(req, res) => {
+});
 
-    // res.render('../view/template/login')
+app.post('/login', async(req, res) => {
+    console.log(req.body)
     const user = await User.findOne({
-        attributes: ['id', 'name', 'email', 'password'],
+        attributes: ['id', 'name', 'email', 'senha'],
         where: {
             email: req.body.email,
             //password: req.body.password
         }
-    })
+    });
 
     if (user === null) {
 
@@ -62,38 +67,32 @@ app.post('/login', async(req, res) => {
             mensagem: 'Usuário ou senha incorreta.'
         })
     }
-    if (!(await bcrypt.compare(req.body.password, user.password))) {
+    if (!(await bcrypt.compare(req.body.password, user.senha))) {
         return res.status(400).json({
             erro: true,
             mensagem: 'Senha incorreta',
         })
+    } else {
+        res.redirect('/')
     }
     const token = jwt.sign({ id: user.id, name: user.name }, 'ASD4ASDAS5D4SAD2ASDSADS8F5', {
         expiresIn: 600 //10 min
     })
-    let options = {
-        path: "/",
-        sameSite: true,
-        maxAge: 1000 * 60 * 60 * 24, // would expire after 24 hours
-        httpOnly: true, // The cookie only accessible by the web server
-    }
-    console.log(token)
-    res.cookie('x-access-token', token, options)
-})
 
+})
+app.get('/cadastrar', (req, res) => {
+    res.render('../view/template/cadastrarUser.ejs')
+})
 app.post('/cadastrar', async(req, res) => {
     const dados = req.body
-    dados.password = await bcrypt.hash(dados.password, 8)
+        //console.log(dados)
+    dados.senha = await bcrypt.hash(dados.senha, 8)
     await User.create(dados).then(() => {
-        return res.status(201).json({
-            erro: false,
-            mensagem: 'Usuário Cadastrado com sucesso'
-        })
+
+        res.redirect('/')
     }).catch((err) => {
-        return res.status(400).json({
-            erro: true,
-            mensagem: 'Erro ao cadastrar'
-        })
+        console.log(err)
+
     })
 })
 
