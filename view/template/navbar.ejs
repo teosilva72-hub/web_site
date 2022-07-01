@@ -29,9 +29,21 @@
             </div>
             <div class="offcanvas-body">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Menu</a>
-                    </li>
+                    <div class="btn-group">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true">
+                          Menu
+                        </a>
+                        <ul class="dropdown-menu" id="nav">
+                            <% for (var i =0; i <menu.length;  i++ ) { %>
+                                <li>
+                                    <a class="dropdown-item" href="#<%= menu[i].categoria %>">
+                                        <%= menu[i].name %>
+                                    </a>
+                                </li>
+                                <% } %>
+                        </ul>
+                    </div>
+
                     <li class="nav-item">
                         <a class="nav-link" href="/contato">Contato</a>
                     </li>
@@ -42,7 +54,7 @@
                         <a class="nav-link" href="/cadastrar">Editar</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/login">Login</a>
+                        <a class="nav-link linkLogin" href="/login">Login</a>
                     </li>
                 </ul>
 

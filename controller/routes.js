@@ -1,50 +1,51 @@
-const express = require('express')
-const app = express()
-const path = require('path')
-const bodyParser = require('body-parser')
-const conn = require('../model/database/payment')
-const payment = require('../model/database/payment')
-const User = require('../model/database/user')
-const Pedido = require('../model/database/pedido')
-const Produto = require('../model/database/produto')
-const Carrosel = require('../model/database/carrosel')
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
-const { eAdmin } = require('./auth')
-const cookieParser = require('cookie-parser')
-const port = 3000
-app.listen(port)
-app.use(cookieParser())
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
-app.use(express.json())
+const express = require('express');
+const app = express();
+const path = require('path');
+const bodyParser = require('body-parser');
+const conn = require('../model/database/payment');
+const payment = require('../model/database/payment');
+const User = require('../model/database/user');
+const Pedido = require('../model/database/pedido');
+const Produto = require('../model/database/produto');
+const Carrosel = require('../model/database/carrosel');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const { eAdmin } = require('./auth');
+const cookieParser = require('cookie-parser');
+const Menu = require('../model/database/menu')
+const port = 3000;
+
+app.listen(port);
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(express.json());
 app.set('view engine', 'ejs');
-app.set('views', './view/')
+app.set('views', './view/');
+const dateUser = [];
 
 app.get('/', async(req, res) => {
     const produto = await Produto.findAll();
     const carrosel = await Carrosel.findAll();
-    console.log(carrosel)
-    res.render('../view/index.ejs', { produto: produto, carrosel: carrosel })
-
+    const menu = await Menu.findAll();
+    res.render('../view/index.ejs', { produto: produto, carrosel: carrosel, userName: dateUser, menu: menu });
 });
 
 app.get('/cadastrar-Produto', (req, res) => {
-    res.render('../view/template/cadastroProd.ejs')
+    res.render('../view/template/cadastroProd.ejs');
 });
 
 app.post('/cadastrar-Produto', async(req, res) => {
     const dados = req.body
         //console.log(dados)
     await Produto.create(dados).then(() => {
-        console.log(dados)
+        //console.log(dados)
     }).catch((err) => {
-        console.log(err)
+        console.log(err);
     })
 
     return res.status(200);
 });
-
 
 app.get('/login', (req, res) => {
     res.render('../view/template/login')
@@ -73,6 +74,8 @@ app.post('/login', async(req, res) => {
             mensagem: 'Senha incorreta',
         })
     } else {
+        //localStorage.setItem('userName', user.name)
+        dateUser[0] = user.name;
         res.redirect('/')
     }
     const token = jwt.sign({ id: user.id, name: user.name }, 'ASD4ASDAS5D4SAD2ASDSADS8F5', {
@@ -80,6 +83,10 @@ app.post('/login', async(req, res) => {
     })
 
 })
+
+function getUser(user) {
+    return user;
+}
 app.get('/cadastrar', (req, res) => {
     res.render('../view/template/cadastrarUser.ejs')
 })
