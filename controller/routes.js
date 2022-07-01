@@ -76,6 +76,8 @@ app.post('/login', async(req, res) => {
     } else {
         //localStorage.setItem('userName', user.name)
         dateUser[0] = user.name;
+        //teste('teste')
+
         res.redirect('/')
     }
     const token = jwt.sign({ id: user.id, name: user.name }, 'ASD4ASDAS5D4SAD2ASDSADS8F5', {
