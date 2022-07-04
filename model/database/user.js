@@ -1,3 +1,4 @@
+const sequelize = require('sequelize')
 const { Sequelize } = require('./conn')
 const Conn = require('./conn')
 const User = Conn.conn.define('user', {
@@ -30,6 +31,12 @@ const User = Conn.conn.define('user', {
         },
         uf: {
             type: Sequelize.STRING
+        },
+        number: {
+            type: sequelize.STRING
+        },
+        tel: {
+            type: sequelize.STRING
         }
     })
     //User.sync({ force: true })

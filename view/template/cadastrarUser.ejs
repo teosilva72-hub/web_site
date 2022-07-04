@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/css/estrelaEfeito.css">
 </head>
 
-<body class="bg-secondary ">
+<body class="bg-secondary">
     <%-include('./navbar.ejs')%>
         <section class="section">
             <article class="registerUser container">
@@ -23,12 +23,12 @@
                         </div>
                         <div class="col-12">
                             <span for="nome">Nome Completo</span>
-                            <input type="text" id="name" name="name" class="form-control" value="" required placeholder="">
+                            <input type="text" id="name" name="name" class="form-control validation" value="" required placeholder="">
                             <hr>
                         </div>
                         <div class="col-12">
                             <span for="tel">Telefone</span>
-                            <input type="tel" id="tel" name="tel" class="form-control" value="" required placeholder="(11) 9999-9999">
+                            <input type="tel" id="tel" name="tel" class="form-control validation" value="" required placeholder="(11) 9999-9999">
                         </div>
                         <div class="col-12">
                             <hr>
@@ -37,7 +37,7 @@
                         </div>
                         <div class="col-12">
                             <span for="email">E-mail</span>
-                            <input type="email" id="email" name="email" class="form-control" value="" required placeholder="user@user.com">
+                            <input type="email" id="email" name="email" class="form-control validation" value="" required placeholder="user@user.com">
                         </div>
                         <div class="col-12">
                             <hr>
@@ -45,11 +45,11 @@
                         </div>
                         <div class="col-6">
                             <span for="senha">Senha</span>
-                            <input type="password" id="senha" name="senha" class="form-control" value="" required>
+                            <input type="password" id="senha" name="senha" class="form-control validation" value="" required>
                         </div>
                         <div class="col-6">
                             <span for="senha">Repetir a Senha</span>
-                            <input type="password" id="senhaR" name="senhaR" class="form-control" value="" required>
+                            <input type="password" id="senhaR" name="senhaR" class="form-control validation" value="" required>
                         </div>
                         <div class="col-12">
                             <hr>
@@ -57,40 +57,40 @@
                         </div>
                         <div class="col-6">
                             <span for="cep">CEP</span>
-                            <input type="number" id="cep" name="cep" class="form-control" value="" required>
+                            <input type="number" id="cep" name="cep" class="form-control validation" value="" required>
                         </div>
                         <div class="col-6">
                             <span for="num">Número/Compl.</span>
-                            <input type="text" id="num" name="num" class="form-control" value="" required>
+                            <input type="text" id="num" name="number" class="form-control" value="" required>
                         </div>
                         <div class="col-6">
                             <span for="logradouro">Logradouro</span>
-                            <input type="text" id="logradouro" name="logradouro" class="form-control" value="" readonly>
+                            <input type="text" id="logradouro" name="logradouro" class="form-control validation" value="" readonly>
                         </div>
                         <div class="col-6">
                             <span for="bairro">Bairro</span>
-                            <input type="text" id="Bairro" name="bairro" class="form-control" value="" readonly>
+                            <input type="text" id="Bairro" name="bairro" class="form-control validation" value="" readonly>
                         </div>
                         <div class="col-8">
                             <span for="cidade">Cidade</span>
-                            <input type="text" id="cidade" name="cidade" class="form-control" value="" readonly>
+                            <input type="text" id="cidade" name="cidade" class="form-control validation" value="" readonly>
                         </div>
                         <div class="col-4">
                             <span for="uf">UF</span>
-                            <input type="text" id="uf" name="uf" class="form-control" value="" readonly>
+                            <input type="text" id="uf" name="uf" class="form-control validation" value="" readonly>
                         </div>
                         <div class="col-12">
                             <hr>
-                            <button type="submit" class="btn btn-dark" disabled>Cadastrar</button>
-                            <a href="/" class="btn btn-danger">Tela Inicial</a>
+                            <button type="submit" class="btn btn-danger btn-cadastrar-user">Cadastrar</button>
+                            <a href="/" class="btn btn-warning">Tela Inicial</a>
                         </div>
                     </div>
                 </form>
             </article>
         </section>
-
-        <script src="/jquery/dist/jquery.js"></script>
+        <script src="/jquery/dist/jquery.min.js"></script>
         <script src="/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="/js/user/main.js"></script>
 </body>
 
 </html>

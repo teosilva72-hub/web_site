@@ -25,9 +25,9 @@ app.set('views', './view/');
 const dateUser = [];
 
 app.get('/', async(req, res) => {
+    const menu = await Menu.findAll();
     const produto = await Produto.findAll();
     const carrosel = await Carrosel.findAll();
-    const menu = await Menu.findAll();
     res.render('../view/index.ejs', { produto: produto, carrosel: carrosel, userName: dateUser, menu: menu });
 });
 
@@ -52,7 +52,6 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/login', async(req, res) => {
-    console.log(req.body)
     const user = await User.findOne({
         attributes: ['id', 'name', 'email', 'senha'],
         where: {
@@ -63,10 +62,7 @@ app.post('/login', async(req, res) => {
 
     if (user === null) {
 
-        return res.status(400).json({
-            erro: true,
-            mensagem: 'Usuário ou senha incorreta.'
-        })
+        return res.status(400)
     }
     if (!(await bcrypt.compare(req.body.password, user.senha))) {
         return res.status(400).json({
@@ -74,9 +70,7 @@ app.post('/login', async(req, res) => {
             mensagem: 'Senha incorreta',
         })
     } else {
-        //localStorage.setItem('userName', user.name)
-        dateUser[0] = user.name;
-        //teste('teste')
+        dateUser[0] = `${user.name}, ${user.email}`
 
         res.redirect('/')
     }
@@ -89,16 +83,16 @@ app.post('/login', async(req, res) => {
 function getUser(user) {
     return user;
 }
-app.get('/cadastrar', (req, res) => {
-    res.render('../view/template/cadastrarUser.ejs')
+app.get('/cadastrar-user', async(req, res) => {
+    const menu = await Menu.findAll();
+    res.render('../view/template/cadastrarUser.ejs', { menu: menu });
 })
-app.post('/cadastrar', async(req, res) => {
+app.post('/cadastrar-user', async(req, res) => {
     const dados = req.body
-        //console.log(dados)
     dados.senha = await bcrypt.hash(dados.senha, 8)
     await User.create(dados).then(() => {
 
-        res.redirect('/')
+        res.redirect('/login');
     }).catch((err) => {
         console.log(err)
 

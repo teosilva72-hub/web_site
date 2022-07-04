@@ -15,6 +15,39 @@ body {
     height: 100%;
 }
 
+#cesta {
+    display: none;
+}
+
 .offcanvas-title {
     color: white;
+}
+
+.svg.bi.bi-whatsapp {
+    color: green;
+}
+
+.bi-cart-plus-fill svg {
+    font-weight: 500;
+}
+
+@media (min-width: 500px) {
+    #carrosel {
+        display: none;
+    }
+    #cesta {
+        display: none;
+    }
+}
+
+@media (max-width: 500px) {
+    #cesta {
+        display: block;
+    }
+    .cesta {
+        display: none;
+    }
+    body {
+        height: 150%;
+    }
 }
