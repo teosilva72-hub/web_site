@@ -8,11 +8,13 @@ function storageUser(user) {
         localStorage.setItem('name', user[0]);
         localStorage.setItem('email', user[1]);
     } else {
-        if (localStorage.getItem('name') != null || localStorage.getItem(email) == null) {
+        if (localStorage.getItem('name') != null || localStorage.getItem('email') == null) {
             //logado
+            console.log('aqui')
             alert1();
         } else {
-            //ninguém logado
+            console.log('ninguem logado')
+                //ninguém logado
         }
     }
 }
