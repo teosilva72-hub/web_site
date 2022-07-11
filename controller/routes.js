@@ -28,7 +28,8 @@ app.get('/', async(req, res) => {
     const menu = await Menu.findAll();
     const produto = await Produto.findAll();
     const carrosel = await Carrosel.findAll();
-    res.render('../view/index.ejs', { produto: produto, carrosel: carrosel, userName: dateUser, menu: menu });
+    await res.render('../view/index.ejs', { produto: produto, carrosel: carrosel, userName: dateUser, menu: menu });
+
 });
 
 app.get('/cadastrar-Produto', (req, res) => {
@@ -70,13 +71,13 @@ app.post('/login', async(req, res) => {
             mensagem: 'Senha incorreta',
         })
     } else {
-        dateUser[0] = `${user.name}, ${user.email}`
+        // dateUser[0] = `${user.name}, ${user.email}`;
 
-        res.redirect('/')
+        res.redirect(`/?name=${user.name}&email=${user.email}`);
     }
     const token = jwt.sign({ id: user.id, name: user.name }, 'ASD4ASDAS5D4SAD2ASDSADS8F5', {
         expiresIn: 600 //10 min
-    })
+    });
 
 })
 

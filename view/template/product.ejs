@@ -2,19 +2,35 @@
     <% for (var i =0; i <produto.length;  i++ ) { %>
         <div class="col-md-3">
 
-            <div class="card bg-warning">
-                <div class="card-body">
-                    <img src="img/lanche/<%= produto[i].imagem %>" class="d-block w-100 my-item<%=i %>">
-                    <h5 class="card-title text-center my-item<%=i %>">
-                        <%= produto[i].name %>
+            <div class="card bg-warning setCard">
+                <div class="card-body cards-produto<%= i%>">
+                    <img src="img/lanche/<%= produto[i].imagem %>" class="d-block w-100">
+                    <hr>
+                    <h5 id="name" class="card-title text-center">
+                        <b> <%= produto[i].name %></b>
                     </h5>
-                    <h6 class="card-subtitle mb-2 text-muted my-item<%=i %>">
+                    <h6 id="description" class="card-subtitle mb-2 text-muted">
                         <%= produto[i].descricao %>
                     </h6>
-                    <p class="card-text my-item<%=i %>">
-                        <%= produto[i].valor %>
+                    <p id="valor" class="card-text">
+                        <b><%= produto[i].valor %></b>
                     </p>
-                    <a href="#" class="btn btn-danger my-item<%=i %>"><svg width="20" height="20" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16"><path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z"/></svg></a>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <select id="unidade<%= i%>" class="form-control" onclick="selectInput(this.id)">
+                                <option value="">Unidades</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-12">
+                            <hr>
+                            <button onclick="getPedidos(this.id)" id="my-item<%=i %>" type="button" style="width: 100%;" class="btn btn-danger btn-add unidade<%=i %>btn"><svg width="20" height="20" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16"><path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z"/></svg></button>
+                        </div>
+                        <input type="hidden" value="<%= produto[i].name%>" id="itemName<%=i %>" class="my-item<%=i %>">
+                        <input type="hidden" value="<%= produto[i].valor%>" id="itemValor<%=i %>" class="my-item<%=i %>">
+                        <input type="hidden" value="<%= produto[i].descricao%>" id="itemDesc<%=i %>" class="my-item<%=i %>">
+                        <input type="hidden" value="" class="unidade<%=i %> my-item<%=i %>">
+                        <input type="hidden" value="<%=i %>" id="ItemCod" class="my-item<%=i %>">
+                    </div>
                 </div>
             </div>
         </div>
