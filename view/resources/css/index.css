@@ -68,6 +68,17 @@ div#Carrosel {
     body {
         height: 150%;
     }
+    .btnBebida {
+        position: fixed;
+        top: 19%;
+        z-index: 50;
+        width: 20%;
+        left: 80%;
+        box-shadow: inset 0 0 1em gold, 0 0 1em red;
+    }
+    .listBebidas {
+        font-weight: 500;
+    }
 }
 
 .inputRange {

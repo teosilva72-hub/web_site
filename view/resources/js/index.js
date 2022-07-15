@@ -49,6 +49,16 @@ function alert2() {
     }, 15000);
 }
 
+function unidade(id) {
+    console.log(id)
+    for (var i = 0; i <= 30; i++) {
+        let init = ``;
+        $(`#${id}`).append(`
+            <option value="${i}">${i}</option>
+        `);
+    }
+}
+
 function selectInput(id) {
     for (var i = 0; i <= 30; i++) {
         let init = ``;

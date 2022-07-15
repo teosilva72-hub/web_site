@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const conn = require('../model/database/payment');
 const payment = require('../model/database/payment');
 const User = require('../model/database/user');
+const Bebidas = require('../model/database/bebidas');
 const Pedido = require('../model/database/pedido');
 const Produto = require('../model/database/produto');
 const Carrosel = require('../model/database/carrosel');
@@ -28,7 +29,8 @@ app.get('/', async(req, res) => {
     const menu = await Menu.findAll();
     const produto = await Produto.findAll();
     const carrosel = await Carrosel.findAll();
-    await res.render('../view/index.ejs', { produto: produto, carrosel: carrosel, userName: dateUser, menu: menu });
+    const bebidas = await Bebidas.findAll();
+    await res.render('../view/index.ejs', { produto: produto, carrosel: carrosel, userName: dateUser, menu: menu, bebidas: bebidas });
 
 });
 
