@@ -18,33 +18,34 @@
     </header>
 
     <%- include('./template/modalPedido.ejs') %>
+        <%- include('./template/bebidas.ejs') %>
 
-        <main id="main">
-            <article id="ProdutoIndex" class="">
-                <div id="Carrosel">
-                    <%- include('./template/carrosel.ejs')  %>
-                </div>
-                <div class="title">
-                    <div class="top-categoria">
-                        <h5><span class="badge bg-dark bageSet">Menu</span></h5>
+            <main id="main">
+                <article id="ProdutoIndex" class="">
+                    <div id="Carrosel">
+                        <%- include('./template/carrosel.ejs')  %>
                     </div>
-                </div>
-                <div id="Produtos" class="container">
-                    <%- include('./template/product.ejs')%>
-                </div>
-            </article>
-        </main>
-        <input type="hidden" name="userName" value="<%= userName[0] %>" id="userName">
+                    <div class="title">
+                        <div class="top-categoria">
+                            <h5><span class="badge bg-dark bageSet">Menu</span></h5>
+                        </div>
+                    </div>
+                    <div id="Produtos" class="container">
+                        <%- include('./template/product.ejs')%>
+                    </div>
+                </article>
+            </main>
+            <input type="hidden" name="userName" value="<%= userName[0] %>" id="userName">
 
 
-        <script src="/jquery/dist/jquery.js"></script>
+            <script src="/jquery/dist/jquery.js"></script>
 
-        <script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="/js/login.js"></script>
-        <script src="/js/produtos.js"></script>
-        <script src="/js/index.js"></script>
-        <script src="/js/sacola/main.js"></script>
-        <script src="/js/alerts/alert.js"></script>
+            <script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="/js/login.js"></script>
+            <script src="/js/produtos.js"></script>
+            <script src="/js/index.js"></script>
+            <script src="/js/sacola/main.js"></script>
+            <script src="/js/alerts/alert.js"></script>
 
 </body>
 
