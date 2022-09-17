@@ -13,39 +13,42 @@
 </head>
 
 <body>
+    <div class="loading on">
+        <div class="spinner-border text-primary loader1" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
     <header>
         <%- include('./template/navbar.ejs') %>
     </header>
+    <div class="content">
+        <%- include('./template/modalPedido.ejs') %>
+            <%- include('./template/bebidas.ejs') %>
 
-    <%- include('./template/modalPedido.ejs') %>
-        <%- include('./template/bebidas.ejs') %>
-
-            <main id="main">
-                <article id="ProdutoIndex" class="">
-                    <div id="Carrosel">
-                        <%- include('./template/carrosel.ejs')  %>
-                    </div>
-                    <div class="title">
-                        <div class="top-categoria">
-                            <h5><span class="badge bg-dark bageSet">Menu</span></h5>
+                <main id="main">
+                    <article id="ProdutoIndex" class="">
+                        <div id="Carrosel">
+                            <%- include('./template/carrosel.ejs')  %>
                         </div>
-                    </div>
-                    <div id="Produtos" class="container">
-                        <%- include('./template/product.ejs')%>
-                    </div>
-                </article>
-            </main>
-            <input type="hidden" name="userName" value="<%= userName[0] %>" id="userName">
 
+                        <div id="Produtos" class="container">
+                            <%- include('./template/product.ejs')%>
+                        </div>
+                    </article>
+                </main>
+                <input type="hidden" name="userName" value="<%= userName[0] %>" id="userName">
+    </div>
 
-            <script src="/jquery/dist/jquery.js"></script>
+    <script src="/jquery/dist/jquery.js"></script>
 
-            <script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-            <script src="/js/login.js"></script>
-            <script src="/js/produtos.js"></script>
-            <script src="/js/index.js"></script>
-            <script src="/js/sacola/main.js"></script>
-            <script src="/js/alerts/alert.js"></script>
+    <script src="/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/login.js"></script>
+    <script src="/js/produtos.js"></script>
+    <script src="/js/index.js"></script>
+    <script src="/js/sacola/main.js"></script>
+    <script src="/js/alerts/alert.js"></script>
+    <script src="/js/loading.js"></script>
+    <script src="/js/controller.js"></script>
 
 </body>
 

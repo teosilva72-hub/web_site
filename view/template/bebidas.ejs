@@ -13,27 +13,34 @@
             </div>
             <div class="modal-body">
                 <div class="row listBebidas">
-                    <% for (var i =0; i <bebidas.length;  i++ ) { %>
-                        <div class="col-sm-4">
-                            <span><%= bebidas[i].categoria %>: </span>
-                            <b><%= bebidas[i].name %></b>
+                    <% for (var i = 0; i <bebidas.length;  i++ ) { %>
+                        <div class="col-4">
+                            <img class="imgBebidas" src="<%= bebidas[i].imagem %>">
                         </div>
-                        <div class="col-sm-4">
-                            <span>Descrição:</span>
-                            <b><%= bebidas[i].descricao %></b>
-                        </div>
-                        <div class="col-sm-4">
-                            <span>Valor:</span>
-                            <b><%= bebidas[i].valor %></b>
-
+                        <div class="col-8">
+                            <div class="row">
+                                <div class="col-12">
+                                    <span><%= bebidas[i].categoria %>: </span>
+                                    <b><p class="itemBebida<%= i%>"><%= bebidas[i].name %></p></b>
+                                </div>
+                                <div class="col-6">
+                                    <span>Descrição:</span>
+                                    <b><p class="itemBebida<%= i%>"><%= bebidas[i].descricao %></p></b>
+                                </div>
+                                <div class="col-6">
+                                    <span>Valor:</span>
+                                    <b><p class="itemBebida<%= i%>"><%= bebidas[i].valor %></p></b>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-6">
                             <span></span>
-                            <select id="bebidaUnidade<%=i %>" value="" class="form-control" onclick="unidade(this.id);">
+                            <select value="" id="uniBebidas<%=i %>" class="form-control" onclick="(selectInput(this.id))">
                                 <option value="">Unidades</option>
                             </select>
+                            <input type="hidden" class="uniBebidas<%=i %> itemBebida<%= i%>">
                         </div>
-                        <div class="col-6"><button onclick="getPedidos(this.id)" id="my-item<%=i %>" type="button" style="width: 100%;" class="btn btn-danger btn-add unidade<%=i %>btn"><svg width="20" height="20" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16"><path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z"/></svg></button></div>
+                        <div class="col-6"><button onclick="getBebidas(this.id)" id="itemBebida<%=i %>" type="button" style="width: 100%;" class="btn btn-danger"><svg width="20" height="20" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16"><path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z"/></svg></button></div>
                         <div class="col-12">
                             <hr>
                         </div>

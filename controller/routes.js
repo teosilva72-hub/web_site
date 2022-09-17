@@ -26,6 +26,8 @@ app.set('views', './view/');
 const dateUser = [];
 
 app.get('/', async(req, res) => {
+    const x = require('../view/resources/js/controller');
+
     const menu = await Menu.findAll();
     const produto = await Produto.findAll();
     const carrosel = await Carrosel.findAll();
