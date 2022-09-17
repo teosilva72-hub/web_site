@@ -3,15 +3,14 @@ const { promisify } = require('util')
 
 module.exports = {
     eAdmin: async(req, res, next) => {
-        const authHeader = req.headers.authorization
-
+        const authHeader = req.headers.cookie
         if (!authHeader) {
             return res.status(400).json({
                 erro: true,
                 mensagem: 'Erro  necessário realizar o login para acessar! Falta token! A'
             })
         }
-        const [, token] = authHeader.split(' ')
+        const [, token] = authHeader.split('=')
         if (!token) {
             return res.status(400).json({
                 erro: true,
@@ -23,7 +22,7 @@ module.exports = {
             req.userId = decode.id
             req.userName = decode.name
             req.token = token
-            return next()
+            next()
         } catch (err) {
             return res.status(400).json({
                 erro: true,

@@ -15,6 +15,7 @@ const { eAdmin } = require('./auth');
 const cookieParser = require('cookie-parser');
 const Menu = require('../model/database/menu')
 const port = 3000;
+const axios = require('axios')
 
 app.listen(port);
 app.use(cookieParser());
@@ -25,14 +26,17 @@ app.set('view engine', 'ejs');
 app.set('views', './view/');
 const dateUser = [];
 
-app.get('/', async(req, res) => {
+var LocalStorage = require('node-localstorage').LocalStorage;
+  localStorage = new LocalStorage('./scratch');
+ 
+app.get('/', eAdmin, async(req, res) => {
     const x = require('../view/resources/js/controller');
-
+    console.log(req.userName)
     const menu = await Menu.findAll();
     const produto = await Produto.findAll();
     const carrosel = await Carrosel.findAll();
     const bebidas = await Bebidas.findAll();
-    await res.render('../view/index.ejs', { produto: produto, carrosel: carrosel, userName: dateUser, menu: menu, bebidas: bebidas });
+    await res.render('../view/index.ejs', {User: req.userName, produto: produto, carrosel: carrosel, userName: dateUser, menu: menu, bebidas: bebidas });
 
 });
 
@@ -53,7 +57,8 @@ app.post('/cadastrar-Produto', async(req, res) => {
 });
 
 app.get('/login', (req, res) => {
-    res.render('../view/template/login')
+    res.render('../view/template/login');
+    
 });
 
 app.post('/login', async(req, res) => {
@@ -75,13 +80,16 @@ app.post('/login', async(req, res) => {
             mensagem: 'Senha incorreta',
         })
     } else {
-        // dateUser[0] = `${user.name}, ${user.email}`;
-
-        res.redirect(`/?name=${user.name}&email=${user.email}`);
+        
+        const token = jwt.sign({ id: user.id, name: user.name }, 'ASD4ASDAS5D4SAD2ASDSADS8F5', {
+            expiresIn: '1h' //10 min
+        });
+        res.cookie('auth',token);
+        console.log(token)
+        res.redirect(`/`);
+        //return res.json({res:true})
     }
-    const token = jwt.sign({ id: user.id, name: user.name }, 'ASD4ASDAS5D4SAD2ASDSADS8F5', {
-        expiresIn: 600 //10 min
-    });
+    
 
 })
 
