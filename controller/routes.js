@@ -17,7 +17,10 @@ const Menu = require('../model/database/menu')
 const port = 3000;
 const axios = require('axios')
 
-app.listen(port);
+app.listen(port, error=>{
+    if(error) console.log('Erro ', error)
+    else console.log('servidor rodando localhost:',port)
+});
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
