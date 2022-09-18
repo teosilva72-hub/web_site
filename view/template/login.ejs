@@ -27,8 +27,22 @@
                     <span for="user-password">Senha</span>
                     <input type="password" class="form-control" id="senha" name="password" required>
                     <hr>
-                    <button type="submit" class="btn btn-dark" id="logar">Enviar</button>
-                    <a href="/" class="btn btn-danger">Tela Inicial</a>
+                    
+                    <div class="row">
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-dark" id="logar">Enviar</button>
+                            
+                        </div>
+                        <div class="col-4">
+                            <a href="/recuperar-senha" class="btn btn-primary">Esquci a minha senha</a>
+                        </div>
+                        <div class="col-4">
+                            <a href="/" class="btn btn-danger">Tela Inicial</a>
+                        </div>
+                        
+                    <br>
+                    <span id="senhaInvalida"><%= Senha%></span>
+                    </div>
 
                 </div>
             </div>

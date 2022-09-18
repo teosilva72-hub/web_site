@@ -25,11 +25,8 @@ app.use(express.json());
 app.set('view engine', 'ejs');
 app.set('views', './view/');
 const dateUser = [];
-
-var LocalStorage = require('node-localstorage').LocalStorage;
-  localStorage = new LocalStorage('./scratch');
  
-app.get('/', eAdmin, async(req, res) => {
+app.get('/', async(req, res) => {
     const x = require('../view/resources/js/controller');
     console.log(req.userName)
     const menu = await Menu.findAll();
@@ -46,19 +43,15 @@ app.get('/cadastrar-Produto', (req, res) => {
 
 app.post('/cadastrar-Produto', async(req, res) => {
     const dados = req.body
-        //console.log(dados)
     await Produto.create(dados).then(() => {
-        //console.log(dados)
     }).catch((err) => {
         console.log(err);
     })
-
     return res.status(200);
 });
 
 app.get('/login', (req, res) => {
-    res.render('../view/template/login');
-    
+    res.render('../view/template/login', {Senha: ''});
 });
 
 app.post('/login', async(req, res) => {
@@ -75,19 +68,15 @@ app.post('/login', async(req, res) => {
         return res.status(400)
     }
     if (!(await bcrypt.compare(req.body.password, user.senha))) {
-        return res.status(400).json({
-            erro: true,
-            mensagem: 'Senha incorreta',
-        })
+        res.render('../view/template/login', {Senha: 'Senha Invalida!'});
+        return res.status(400)
     } else {
         
         const token = jwt.sign({ id: user.id, name: user.name }, 'ASD4ASDAS5D4SAD2ASDSADS8F5', {
             expiresIn: '1h' //10 min
         });
         res.cookie('auth',token);
-        console.log(token)
         res.redirect(`/`);
-        //return res.json({res:true})
     }
     
 
@@ -108,8 +97,7 @@ app.post('/cadastrar-user', async(req, res) => {
         res.redirect('/login');
     }).catch((err) => {
         console.log(err)
-
-    })
+    });
 })
 
 app.use(express.static(path.join(__dirname, "../view/resources")))
