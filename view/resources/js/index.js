@@ -1,8 +1,8 @@
-$(() => {
+$(init => {
     storageUser($('#userName').val())
     modalPedidos();
     blockedBtn(true, '.btn-add');
-    getMyItem()
+    getMyItem();
 });
 
 function blockedBtn(check, el) {
@@ -97,11 +97,20 @@ function getPedidos(id) {
     unid[0] = obj[3].value;
     cod[0] = obj[4].value
     setItemStorage(nameItem, valor, unid, cod);
-    getMyItem()
+    getMyItem();
+}
+
+function getBebidas(id) {
+    const obj = $(`.${id}`);
+    nameItem[0] = obj[0].textContent;
+    description[0] = obj[1].textContent;
+    valor[0] = obj[2].textContent;
+    unid[0] = obj[3].value;
+    setItemStorage(nameItem, valor, unid, cod);
+    getMyItem();
 }
 
 function setItemStorage(name, value, un, cod) {
-
     let val = 0;
     let index = 0;
     val = localStorage.length + 1;
@@ -128,8 +137,6 @@ function getMyItem() {
             <hr></div>
             
         `);
-
-
     }
 }
 

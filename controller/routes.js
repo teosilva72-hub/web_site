@@ -15,8 +15,12 @@ const { eAdmin } = require('./auth');
 const cookieParser = require('cookie-parser');
 const Menu = require('../model/database/menu')
 const port = 3000;
+const axios = require('axios')
 
-app.listen(port);
+app.listen(port, error=>{
+    if(error) console.log('Erro ', error)
+    else console.log('servidor rodando localhost:',port)
+});
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -24,13 +28,15 @@ app.use(express.json());
 app.set('view engine', 'ejs');
 app.set('views', './view/');
 const dateUser = [];
-
+ 
 app.get('/', async(req, res) => {
+    const x = require('../view/resources/js/controller');
+    console.log(req.userName)
     const menu = await Menu.findAll();
     const produto = await Produto.findAll();
     const carrosel = await Carrosel.findAll();
     const bebidas = await Bebidas.findAll();
-    await res.render('../view/index.ejs', { produto: produto, carrosel: carrosel, userName: dateUser, menu: menu, bebidas: bebidas });
+    await res.render('../view/index.ejs', {User: req.userName, produto: produto, carrosel: carrosel, userName: dateUser, menu: menu, bebidas: bebidas });
 
 });
 
@@ -40,18 +46,15 @@ app.get('/cadastrar-Produto', (req, res) => {
 
 app.post('/cadastrar-Produto', async(req, res) => {
     const dados = req.body
-        //console.log(dados)
     await Produto.create(dados).then(() => {
-        //console.log(dados)
     }).catch((err) => {
         console.log(err);
     })
-
     return res.status(200);
 });
 
 app.get('/login', (req, res) => {
-    res.render('../view/template/login')
+    res.render('../view/template/login', {Senha: ''});
 });
 
 app.post('/login', async(req, res) => {
@@ -68,18 +71,17 @@ app.post('/login', async(req, res) => {
         return res.status(400)
     }
     if (!(await bcrypt.compare(req.body.password, user.senha))) {
-        return res.status(400).json({
-            erro: true,
-            mensagem: 'Senha incorreta',
-        })
+        res.render('../view/template/login', {Senha: 'Senha Invalida!'});
+        return res.status(400)
     } else {
-        // dateUser[0] = `${user.name}, ${user.email}`;
-
-        res.redirect(`/?name=${user.name}&email=${user.email}`);
+        
+        const token = jwt.sign({ id: user.id, name: user.name }, 'ASD4ASDAS5D4SAD2ASDSADS8F5', {
+            expiresIn: '1h' //10 min
+        });
+        res.cookie('auth',token);
+        res.redirect(`/`);
     }
-    const token = jwt.sign({ id: user.id, name: user.name }, 'ASD4ASDAS5D4SAD2ASDSADS8F5', {
-        expiresIn: 600 //10 min
-    });
+    
 
 })
 
@@ -98,8 +100,7 @@ app.post('/cadastrar-user', async(req, res) => {
         res.redirect('/login');
     }).catch((err) => {
         console.log(err)
-
-    })
+    });
 })
 
 app.use(express.static(path.join(__dirname, "../view/resources")))
