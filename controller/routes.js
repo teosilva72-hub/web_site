@@ -15,7 +15,7 @@ const { eAdmin } = require('./auth');
 const cookieParser = require('cookie-parser');
 const Menu = require('../model/database/menu')
 const port = 3000;
-const axios = require('axios')
+//const axios = require('axios')
 
 app.listen(port, error=>{
     if(error) console.log('Erro ', error)
@@ -101,7 +101,11 @@ app.post('/cadastrar-user', async(req, res) => {
     }).catch((err) => {
         console.log(err)
     });
-})
+});
+
+app.get('/recuperar-senha', (req, res) => {
+    res.render('../view/template/recuperar-senha.ejs');
+});
 
 app.use(express.static(path.join(__dirname, "../view/resources")))
 app.use(express.static(path.join(__dirname, "../node_modules")))

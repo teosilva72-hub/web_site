@@ -15,9 +15,7 @@ body {
     height: 100%;
 }
 
-#cesta {
-    display: none;
-}
+
 
 .offcanvas-title {
     color: white;
@@ -53,14 +51,17 @@ div#Carrosel {
     #carrosel {
         display: none;
     }
-    #cesta {
-        display: none;
+    #cesta{
+        display: none
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 575px) {
     #cesta {
         display: block;
+    }
+    #TwoCesta{
+        display: none;
     }
     .cesta {
         display: none;
@@ -72,8 +73,8 @@ div#Carrosel {
         position: fixed;
         top: 10%;
         z-index: 50;
-        width: 20%;
-        left: 80%;
+        width: 20% !important;
+        left: 80% !important;
         box-shadow: inset 0 0 1em gold, 0 0 1em red;
     }
     .listBebidas {
@@ -81,6 +82,11 @@ div#Carrosel {
     }
     svg.bi.bi-cup-straw {
         position: relative;
+    }
+    input#searchProduct {
+        position: unset;
+        width: 100% !important;
+        left: unset !important;
     }
 }
 
@@ -123,4 +129,36 @@ div#Carrosel {
     position: relative;
     top: 30%;
     left: 50%;
+}
+#login-session{
+    position: relative;
+    width: 30%;
+    left: 35%;
+    top: 30%;
+}
+.btn-btn{
+    width: 100%;
+    font-size: 10pt;
+}
+.position-card{
+    position: relative;
+    width: 30%;
+    left: 35%;
+    top: 100px !important;
+}
+.error.on{
+    color: red;
+}
+input#searchProduct {
+    position: relative;
+    width: 20%;
+    left: 5%
+}
+.btnBebida {
+    position: fixed;
+    top: 10%;
+    z-index: 50;
+    width: 10%;
+    left: 90%;
+    box-shadow: inset 0 0 1em gold, 0 0 1em red;
 }

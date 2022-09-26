@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Recuperar Senha</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+
+<body>
+    <form method="post">
+        <div class="position-card">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="row">
+                        <h1 class="p-2 text-center">Recuperar Senha</h1><hr>
+                        <div class="col-md-12 p-2">
+                            <input type="email" name="email" id="email"  class="form-control" placeholder="email@email.com" required>
+                            <span class="error"></span>
+                        </div>
+                        <div class="col-md-12 p-2">
+                            <button type="button" class="btn btn-primary btn-btn p-2" id="setRecupere" onclick="redirect();">Enviar</button>
+                        </div>
+                        <div class="col-md-12 p-2">
+                            <a href="/" class="btn btn-danger btn-btn p-2">Tela Inicial</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script src="/jquery/dist/jquery.js"></script>
+    <script src="/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/js/recuperar-senha.js"></script>
+</body>
+
+</html>

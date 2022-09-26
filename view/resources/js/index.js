@@ -3,6 +3,7 @@ $(init => {
     modalPedidos();
     blockedBtn(true, '.btn-add');
     getMyItem();
+    SumTotalItem();
 });
 
 function blockedBtn(check, el) {
@@ -79,7 +80,7 @@ function selectInput(id) {
 }
 
 function modalPedidos() {
-    $('#cesta').click(() => {
+    $('#cesta, #TwoCesta').click(() => {
         $('#btn-modal').click();
     });
 }
@@ -122,7 +123,7 @@ function setItemStorage(name, value, un, cod) {
 function getMyItem() {
     $('.subclass').remove()
     for (var i = 1; i <= localStorage.length; i++) {
-        $('#item-total').text(`${ localStorage.length }`);
+        $('#item-total, #item-total-two').text(`${ localStorage.length }`);
         let result = localStorage.getItem(i);
         result = result.split(',');
 
@@ -141,5 +142,22 @@ function getMyItem() {
 }
 
 function getTotalItem() {
-    $('#item-total').text(`${ localStorage.length }`);
+    $('#item-total, #item-total-two').text(`${ localStorage.length }`);
+}
+
+function SumTotalItem(){
+    let itemTotal = [];
+    let total = []
+    for(var i = 1; i <= localStorage.length; i++){
+        itemTotal = localStorage.getItem(i);
+        //console.log(itemTotal)
+        itemTotal = itemTotal.split(',')[1];
+        itemTotal = itemTotal.replaceAll('R$', '')
+        total[i] = parseFloat(itemTotal);
+        //console.log(teste[i])
+    }
+    var soma = total.reduce(function(soma, i) {
+        return soma + i;
+    });
+    $('#valorTotal').text(`${soma}`)
 }
