@@ -81,9 +81,7 @@ app.post('/login', async(req, res) => {
         res.cookie('auth',token);
         res.redirect(`/`);
     }
-    
-
-})
+});
 
 function getUser(user) {
     return user;
@@ -96,7 +94,6 @@ app.post('/cadastrar-user', async(req, res) => {
     const dados = req.body
     dados.senha = await bcrypt.hash(dados.senha, 8)
     await User.create(dados).then(() => {
-
         res.redirect('/login');
     }).catch((err) => {
         console.log(err)
