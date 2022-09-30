@@ -4,7 +4,8 @@ const redirect = () => {
            $('.error').text('Campo Obrigatório!')
            $('.error').addClass('on')
         }else{
-            window.location.href = '/';
+            window.location.href = '/login';
+            alert('E-mail de recuperação enviado com sucesso!')
         }
        
     });

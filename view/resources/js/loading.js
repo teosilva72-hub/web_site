@@ -4,7 +4,7 @@ $(init => {
 });
 
 function loading(check, delay) {
-    if (true) {
+    if (check) {
         setTimeout(() => {
             $('.loading').removeClass('on');
             $('.loader1').removeClass('spinner-border');

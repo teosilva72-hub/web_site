@@ -7,90 +7,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastrar Usuários - Burger Divini</title>
     <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/cadastrar.css">
+    <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/css/estrelaEfeito.css">
+    <link rel="stylesheet" href="/css/produto.css">
+    <link rel="stylesheet" href="/css/cadastrar.css">
 </head>
 
-<body class="bg-secondary">
+<body class="">
     <%-include('./navbar.ejs')%>
-        <section class="section">
-            <article class="registerUser container">
-                <form method="post">
-                    <div class="row">
-                        <div class="col-12">
-                            <h3 class="text-center text-bg-dark">REGISTRAR-SE!</h3>
-                            <hr>
+        <%- include('../template/modalPedido.ejs') %>
+            <section class="section">
+                <article class="registerUser container">
+                    <form method="post" id="formUser">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3 class="text-center text-bg-dark">REGISTRAR-SE!</h3>
+                                <hr>
+                            </div>
+                            <div class="col-md-12">
+                                <span for="nome">Nome Completo</span>
+                                <input type="text" id="name" name="name" class="form-control validation" value=""
+                                    required placeholder="">
+                                <hr>
+                            </div>
+                            <div class="col-md-12">
+                                <span for="tel">Telefone</span>
+                                <input type="tel" id="tel" name="tel" class="form-control validation" value="" required
+                                    placeholder="(11) 9999-9999">
+                            </div>
+                            <div class="col-md-12">
+                                <hr>
+                                <h6 class="text-bg-danger">* Digite o seu melhor email.
+                                    <h6>
+                            </div>
+                            <div class="col-md-12">
+                                <span for="email">E-mail</span>
+                                <input type="email" id="email" name="email" class="form-control validation" value=""
+                                    required placeholder="user@user.com">
+                            </div>
+                            <div class="col-md-12">
+                                <hr>
+                                <h6 class="text-bg-danger">* Crie a sua senha de acesso.</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <span for="senha">Senha</span>
+                                <input type="password" id="senha" name="senha" class="form-control validation" value=""
+                                    required>
+                            </div>
+                            <div class="col-md-6">
+                                <span for="senha">Repetir a Senha</span>
+                                <input type="password" id="senhaR" name="senhaR" class="form-control validation"
+                                    value="" required>
+                            </div>
+                            <div class="col-md-12">
+                                <hr>
+                                <h6 class="text-center text-bg-warning">Endereço de Entrega.</h6>
+                            </div>
+                            <div class="col-md-6">
+                                <span for="cep">CEP</span>
+                                <input type="number" id="cep" name="cep" class="form-control validation" value=""
+                                    required>
+                            </div>
+                            <div class="col-md-6">
+                                <span for="num">Número/Compl.</span>
+                                <input type="text" id="num" name="number" class="form-control" value="" required>
+                            </div>
+                            <div class="col-md-6">
+                                <span for="logradouro">Logradouro</span>
+                                <input type="text" id="logradouro" name="logradouro" class="form-control validation"
+                                    value="" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <span for="bairro">Bairro</span>
+                                <input type="text" id="Bairro" name="bairro" class="form-control validation" value=""
+                                    readonly>
+                            </div>
+                            <div class="col-md-8">
+                                <span for="cidade">Cidade</span>
+                                <input type="text" id="cidade" name="cidade" class="form-control validation" value=""
+                                    readonly>
+                            </div>
+                            <div class="col-md-4">
+                                <span for="uf">UF</span>
+                                <input type="text" id="uf" name="uf" class="form-control validation" value="" readonly>
+                            </div>
+                            <div class="col=md-12">
+                                <hr>
+                                <button type="submit" class="btn btn-danger btn-cadastrar-user">Cadastrar</button>
+                                <a href="/" class="btn btn-warning">Tela Inicial</a>
+                            </div>
                         </div>
-                        <div class="col-12">
-                            <span for="nome">Nome Completo</span>
-                            <input type="text" id="name" name="name" class="form-control validation" value="" required placeholder="">
-                            <hr>
-                        </div>
-                        <div class="col-12">
-                            <span for="tel">Telefone</span>
-                            <input type="tel" id="tel" name="tel" class="form-control validation" value="" required placeholder="(11) 9999-9999">
-                        </div>
-                        <div class="col-12">
-                            <hr>
-                            <h6 class="text-bg-danger">* Digite o seu melhor email.
-                                <h6>
-                        </div>
-                        <div class="col-12">
-                            <span for="email">E-mail</span>
-                            <input type="email" id="email" name="email" class="form-control validation" value="" required placeholder="user@user.com">
-                        </div>
-                        <div class="col-12">
-                            <hr>
-                            <h6 class="text-bg-danger">* Crie a sua senha de acesso.</h6>
-                        </div>
-                        <div class="col-6">
-                            <span for="senha">Senha</span>
-                            <input type="password" id="senha" name="senha" class="form-control validation" value="" required>
-                        </div>
-                        <div class="col-6">
-                            <span for="senha">Repetir a Senha</span>
-                            <input type="password" id="senhaR" name="senhaR" class="form-control validation" value="" required>
-                        </div>
-                        <div class="col-12">
-                            <hr>
-                            <h6 class="text-center text-bg-warning">Endereço de Entrega.</h6>
-                        </div>
-                        <div class="col-6">
-                            <span for="cep">CEP</span>
-                            <input type="number" id="cep" name="cep" class="form-control validation" value="" required>
-                        </div>
-                        <div class="col-6">
-                            <span for="num">Número/Compl.</span>
-                            <input type="text" id="num" name="number" class="form-control" value="" required>
-                        </div>
-                        <div class="col-6">
-                            <span for="logradouro">Logradouro</span>
-                            <input type="text" id="logradouro" name="logradouro" class="form-control validation" value="" readonly>
-                        </div>
-                        <div class="col-6">
-                            <span for="bairro">Bairro</span>
-                            <input type="text" id="Bairro" name="bairro" class="form-control validation" value="" readonly>
-                        </div>
-                        <div class="col-8">
-                            <span for="cidade">Cidade</span>
-                            <input type="text" id="cidade" name="cidade" class="form-control validation" value="" readonly>
-                        </div>
-                        <div class="col-4">
-                            <span for="uf">UF</span>
-                            <input type="text" id="uf" name="uf" class="form-control validation" value="" readonly>
-                        </div>
-                        <div class="col-12">
-                            <hr>
-                            <button type="submit" class="btn btn-danger btn-cadastrar-user">Cadastrar</button>
-                            <a href="/" class="btn btn-warning">Tela Inicial</a>
-                        </div>
-                    </div>
-                </form>
-            </article>
-        </section>
-        <script src="/jquery/dist/jquery.min.js"></script>
-        <script src="/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="/js/user/main.js"></script>
+                    </form>
+                </article>
+            </section>
+            <script src="/jquery/dist/jquery.min.js"></script>
+            <script src="/bootstrap/dist/js/bootstrap.js"></script>
+            <script src="/js/login.js"></script>
+            <script src="/js/produtos.js"></script>
+            <script src="/js/index.js"></script>
+            <script src="/js/sacola/main.js"></script>
+            <script src="/js/alerts/alert.js"></script>
+            <script src="/js/loading.js"></script>
+            <script src="/js/controller.js"></script>
+            <script src="/js/user/main.js"></script>
+
 </body>
 
 </html>

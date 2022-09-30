@@ -5,7 +5,10 @@ $(() => {
     })
     $('.validation').on('change', () => {
         inputValidation();
-    })
+    });
+    $('#searchProduct').addClass('d-none');
+    getMyItem();
+    modalPedidos();
 });
 
 async function viaCep(cep) {

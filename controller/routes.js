@@ -30,8 +30,6 @@ app.set('views', './view/');
 const dateUser = [];
  
 app.get('/', async(req, res) => {
-    const x = require('../view/resources/js/controller');
-    console.log(req.userName)
     const menu = await Menu.findAll();
     const produto = await Produto.findAll();
     const carrosel = await Carrosel.findAll();
@@ -53,8 +51,12 @@ app.post('/cadastrar-Produto', async(req, res) => {
     return res.status(200);
 });
 
-app.get('/login', (req, res) => {
-    res.render('../view/template/login', {Senha: ''});
+app.get('/login', async(req, res) => {
+    const menu = await Menu.findAll();
+    const produto = await Produto.findAll();
+    const carrosel = await Carrosel.findAll();
+    const bebidas = await Bebidas.findAll();
+    res.render('../view/template/login', {Senha: '',User: req.userName, produto: produto, carrosel: carrosel, userName: dateUser, menu: menu, bebidas: bebidas});
 });
 
 app.post('/login', async(req, res) => {
@@ -71,7 +73,7 @@ app.post('/login', async(req, res) => {
         return res.status(400)
     }
     if (!(await bcrypt.compare(req.body.password, user.senha))) {
-        res.render('../view/template/login', {Senha: 'Senha Invalida!'});
+        res.render('../view/template/login', {Senha: 'Senha Invalida!',});
         return res.status(400)
     } else {
         
