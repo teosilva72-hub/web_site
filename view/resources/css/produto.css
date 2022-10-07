@@ -11,3 +11,7 @@ img {
 img.imgBebidas {
     width: 90px;
 }
+button.btn.btn-success.btnBebida {
+    border-radius: 41px;
+    background-color: black;
+}

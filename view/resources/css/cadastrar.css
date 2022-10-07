@@ -22,3 +22,11 @@ body {
         height: 150vh;
     }
 }
+
+.error{
+    border: red 2px solid;
+
+}
+.success{
+    border: green 2px solid;
+}
